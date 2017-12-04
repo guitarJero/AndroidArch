@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="data"
+            type="com.sagar.android_projects.androidarch.pojo.Data"/>
+
+        <variable
+            name="context"
+            type="com.sagar.android_projects.androidarch.ui.mainactivity.MainActivity"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.sagar.android_projects.androidarch.ui.mainactivity.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <EditText
+            android:id="@+id/edittext_user_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/user_id"
+            android:onTextChanged="@{context::textChangedInEditText}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/button_get_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->context.getUserDetails()}"
+            android:text="@string/get_data"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_user_id"/>
+
+        <TextView
+            android:id="@+id/textview_result"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{data.result==null?data.NOTHING_TO_SHOW:data.result}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_get_data"/>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{context.isDataBeingFetched?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
