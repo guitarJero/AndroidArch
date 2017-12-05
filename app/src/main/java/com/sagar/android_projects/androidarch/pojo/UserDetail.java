@@ -1,51 +1,33 @@
 package com.sagar.android_projects.androidarch.pojo;
 
 
+import com.sagar.android_projects.androidarch.repository.database.UserEntity;
+
 public class UserDetail {
-    private int userId;
-    private String firstName;
-    private String lastName;
-    private String avatar;
+    private UserEntity userEntity;
+    private Response response;
 
     public UserDetail() {
     }
 
-    public UserDetail(int userId, String firstName, String lastName, String avatar) {
-        this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.avatar = avatar;
+    public UserDetail(UserEntity userEntity, Response response) {
+        this.userEntity = userEntity;
+        this.response = response;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Response getResponse() {
+        return response;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setResponse(Response response) {
+        this.response = response;
     }
 }
