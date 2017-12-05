@@ -42,9 +42,22 @@ public class MainActivity extends AppCompatActivity {
                         activityMainBinding.setData(data);
                     }
                 });
+
+        mainActivityViewModel.getIsDataBeingFetched().observe(this,
+                new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        if (aBoolean == null)
+                            return;
+                        isDataBeingFetched = aBoolean;
+                    }
+                });
     }
 
-    public void textChangedInEditText(CharSequence s, int start, int before, int count) {
+    public void textChangedInEditText(CharSequence s,
+                                      @SuppressWarnings("unused") int start,
+                                      @SuppressWarnings("unused") int before,
+                                      @SuppressWarnings("unused") int count) {
         edittextText = s.toString();
     }
 
