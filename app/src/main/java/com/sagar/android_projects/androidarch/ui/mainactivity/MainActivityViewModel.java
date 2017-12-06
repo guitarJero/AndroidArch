@@ -27,20 +27,21 @@ public class MainActivityViewModel extends ViewModel {
         isDataBeingFetched.setValue(false);
     }
 
-    private void getUserData(AndroidArchRepository repository) {
-        data.addSource(repository.getUserDetails("2"),
+    private void getUserData(AndroidArchRepository repository, String userId) {
+        isDataBeingFetched.setValue(true);
+        data.addSource(repository.getUserDetails(userId),
                 new Observer<UserDetail>() {
                     @Override
                     public void onChanged(@Nullable UserDetail userDetail) {
                         data.setValue(userDetail);
+                        isDataBeingFetched.setValue(false);
                     }
                 });
     }
 
-    public MutableLiveData<UserDetail> getData() {
-        if (data == null)
-            data = new MediatorLiveData<>();
-        getUserData(repository);
+    public MutableLiveData<UserDetail> getData(String userId) {
+        data = new MediatorLiveData<>();
+        getUserData(repository, userId);
         return data;
     }
 

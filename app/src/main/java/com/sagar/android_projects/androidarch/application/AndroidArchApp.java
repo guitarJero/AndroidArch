@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.util.Log;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sagar.android_projects.androidarch.constants.Const;
 import com.sagar.android_projects.androidarch.repository.AndroidArchRepository;
 import com.sagar.android_projects.androidarch.repository.database.UserRoomDatabase;
@@ -25,9 +26,6 @@ public class AndroidArchApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        userRoomDatabase = Room.databaseBuilder(this, UserRoomDatabase.class, UserRoomDatabase.DATABASE_NAME).build();
-        androidArchRepository = new AndroidArchRepository();
-
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
@@ -42,10 +40,14 @@ public class AndroidArchApp extends Application {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://reqres.in/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
 
         apiInterface = retrofit.create(AndroidArchApiInterface.class);
+
+        userRoomDatabase = Room.databaseBuilder(this, UserRoomDatabase.class, UserRoomDatabase.DATABASE_NAME).build();
+        androidArchRepository = new AndroidArchRepository(apiInterface);
     }
 
     public UserRoomDatabase getUserRoomDatabase() {

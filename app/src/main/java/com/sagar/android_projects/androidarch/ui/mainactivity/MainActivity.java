@@ -6,12 +6,18 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.sagar.android_projects.androidarch.R;
 import com.sagar.android_projects.androidarch.application.AndroidArchApp;
+import com.sagar.android_projects.androidarch.constants.Const;
 import com.sagar.android_projects.androidarch.databinding.ActivityMainBinding;
+import com.sagar.android_projects.androidarch.pojo.UserData;
 import com.sagar.android_projects.androidarch.pojo.UserDetail;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,13 +57,29 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        mainActivityViewModel.getData().observe(this,
-                new Observer<UserDetail>() {
+        ((AndroidArchApp)getApplicationContext()).getApiInterface()
+                .getUserDetail("2")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new io.reactivex.Observer<UserData>() {
                     @Override
-                    public void onChanged(@Nullable UserDetail userDetail) {
-                        if (userDetail == null)
-                            return;
-                        activityMainBinding.setData(userDetail);
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(UserData user) {
+                        Log.i(Const.LOG_TAG, "onNext: "+user.getUserEntity());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
@@ -70,6 +92,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getUserDetails() {
-        Toast.makeText(this, "the data is " + edittextText, Toast.LENGTH_SHORT).show();
+        if (edittextText == null)
+            return;
+        if (edittextText.length() == 0)
+            return;
+        mainActivityViewModel.getData(edittextText).observe(this,
+                new Observer<UserDetail>() {
+                    @Override
+                    public void onChanged(@Nullable UserDetail userDetail) {
+                        if (userDetail == null)
+                            return;
+                        activityMainBinding.setData(userDetail);
+                    }
+                });
     }
 }
