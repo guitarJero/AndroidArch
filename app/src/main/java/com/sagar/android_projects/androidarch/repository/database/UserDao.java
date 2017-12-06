@@ -5,14 +5,14 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Dao
 public interface UserDao {
-    @Query("SELECT * FROM UserEntity")
-    public ArrayList<LiveData<UserEntity>> getAllUser();
+    @Query("SELECT * FROM UserDetail")
+    public LiveData<List<UserEntity>> getAllUser();
 
-    @Query("SELECT * FROM UserEntity WHERE userId = :userId")
+    @Query("SELECT * FROM UserDetail WHERE userId = :userId")
     public LiveData<UserEntity> getUserDetail(String userId);
 
     @Insert

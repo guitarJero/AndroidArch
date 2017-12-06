@@ -2,6 +2,7 @@ package com.sagar.android_projects.androidarch.pojo;
 
 
 import com.sagar.android_projects.androidarch.repository.database.UserEntity;
+import com.sagar.android_projects.androidarch.util.Response;
 
 public class UserDetail {
     private UserEntity userEntity;

@@ -9,8 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.sagar.android_projects.androidarch.R;
+import com.sagar.android_projects.androidarch.application.AndroidArchApp;
 import com.sagar.android_projects.androidarch.databinding.ActivityMainBinding;
-import com.sagar.android_projects.androidarch.pojo.Data;
+import com.sagar.android_projects.androidarch.pojo.UserDetail;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressWarnings("FieldCanBeLocal")
     private MainActivityViewModel mainActivityViewModel;
+    ViewModelProviderMainActivity viewModelProviderMainActivity;
 
     private String edittextText;
     public boolean isDataBeingFetched;
@@ -33,23 +35,29 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(activityMainBinding.toolbar);
 
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        viewModelProviderMainActivity = new ViewModelProviderMainActivity(this.getApplication(),
+                ((AndroidArchApp) getApplicationContext()).getAndroidArchRepository());
 
-        mainActivityViewModel.getData().observe(this,
-                new Observer<Data>() {
-                    @Override
-                    public void onChanged(@Nullable Data data) {
-                        activityMainBinding.setData(data);
-                    }
-                });
+        mainActivityViewModel = ViewModelProviders.of(this, viewModelProviderMainActivity)
+                .get(MainActivityViewModel.class);
 
         mainActivityViewModel.getIsDataBeingFetched().observe(this,
                 new Observer<Boolean>() {
                     @Override
-                    public void onChanged(Boolean aBoolean) {
+                    public void onChanged(@Nullable Boolean aBoolean) {
                         if (aBoolean == null)
                             return;
                         isDataBeingFetched = aBoolean;
+                    }
+                });
+
+        mainActivityViewModel.getData().observe(this,
+                new Observer<UserDetail>() {
+                    @Override
+                    public void onChanged(@Nullable UserDetail userDetail) {
+                        if (userDetail == null)
+                            return;
+                        activityMainBinding.setData(userDetail);
                     }
                 });
     }

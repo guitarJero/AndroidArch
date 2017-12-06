@@ -6,9 +6,13 @@
 
         <import type="android.view.View"/>
 
+        <import type="com.sagar.android_projects.androidarch.util.Response"/>
+
+        <import type="com.sagar.android_projects.androidarch.util.Messages"/>
+
         <variable
             name="data"
-            type="com.sagar.android_projects.androidarch.pojo.Data"/>
+            type="com.sagar.android_projects.androidarch.pojo.UserDetail"/>
 
         <variable
             name="context"
@@ -49,7 +53,7 @@
             style="@style/Base.TextAppearance.AppCompat.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{data.result==null?data.NOTHING_TO_SHOW:data.result}"
+            android:text="@{data.response==Response.FAILED?Messages.NOTHING_TO_SHOW:data.userEntity.firstName}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_get_data"/>

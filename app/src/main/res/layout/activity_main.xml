@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="com.sagar.android_projects.androidarch.pojo.Data"/>
+            type="com.sagar.android_projects.androidarch.pojo.UserDetail"/>
 
         <variable
             name="context"
