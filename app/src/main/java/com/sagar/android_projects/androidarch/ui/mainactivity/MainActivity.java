@@ -6,18 +6,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.sagar.android_projects.androidarch.R;
 import com.sagar.android_projects.androidarch.application.AndroidArchApp;
-import com.sagar.android_projects.androidarch.constants.Const;
 import com.sagar.android_projects.androidarch.databinding.ActivityMainBinding;
-import com.sagar.android_projects.androidarch.pojo.UserData;
 import com.sagar.android_projects.androidarch.pojo.UserDetail;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,32 +47,6 @@ public class MainActivity extends AppCompatActivity {
                         if (aBoolean == null)
                             return;
                         isDataBeingFetched = aBoolean;
-                    }
-                });
-
-        ((AndroidArchApp)getApplicationContext()).getApiInterface()
-                .getUserDetail("2")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new io.reactivex.Observer<UserData>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(UserData user) {
-                        Log.i(Const.LOG_TAG, "onNext: "+user.getUserEntity());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
     }
