@@ -56,7 +56,7 @@ public class AndroidArchApp extends Application {
         apiInterface = retrofit.create(AndroidArchApiInterface.class);
 
         userRoomDatabase = Room.databaseBuilder(this, UserRoomDatabase.class, UserRoomDatabase.DATABASE_NAME).build();
-        androidArchRepository = new AndroidArchRepository(apiInterface);
+        androidArchRepository = new AndroidArchRepository(apiInterface,userRoomDatabase);
     }
 
     public UserRoomDatabase getUserRoomDatabase() {

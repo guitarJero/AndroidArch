@@ -16,5 +16,5 @@ public interface UserDao {
     public LiveData<UserEntity> getUserDetail(String userId);
 
     @Insert
-    public void addUser(UserEntity... userEntity);
+    public long[] addUser(UserEntity... userEntity);
 }

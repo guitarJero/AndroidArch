@@ -1,6 +1,7 @@
 package com.sagar.android_projects.androidarch.repository.database;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
@@ -17,6 +18,7 @@ public class UserEntity {
     @SerializedName("avatar")
     private String avatar;
 
+    @Ignore
     public UserEntity() {
     }
 
@@ -31,6 +33,7 @@ public class UserEntity {
         return userId;
     }
 
+    @Ignore
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -39,6 +42,7 @@ public class UserEntity {
         return firstName;
     }
 
+    @Ignore
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -47,6 +51,7 @@ public class UserEntity {
         return lastName;
     }
 
+    @Ignore
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -55,6 +60,7 @@ public class UserEntity {
         return avatar;
     }
 
+    @Ignore
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
