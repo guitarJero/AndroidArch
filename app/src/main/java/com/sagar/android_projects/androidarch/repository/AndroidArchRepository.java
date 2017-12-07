@@ -30,7 +30,7 @@ public class AndroidArchRepository {
     }
 
     private void getUserDetailsFromServer(String userId) {
-        androidArchApiInterface.getUserDetail(userId)
+        androidArchApiInterface.getUserDetail(userId, true, false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UserData>() {
@@ -41,7 +41,7 @@ public class AndroidArchRepository {
 
                     @Override
                     public void onNext(UserData user) {
-                        userDetail.setValue(new UserDetail(user.getUserEntity(),Response.SUCCESS));
+                        userDetail.setValue(new UserDetail(user.getUserEntity(), Response.SUCCESS));
                     }
 
                     @Override

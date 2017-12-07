@@ -40,8 +40,8 @@ public class MainActivityViewModel extends ViewModel {
                     data.getValue().getResponse() == Response.SUCCESS &&
                     queriedUserId.getValue() != null &&
                     queriedUserId.getValue().length() != 0) {
-                if (data.getValue().getUserEntity().getUserId() ==
-                        Integer.parseInt(queriedUserId.getValue())) {
+                if (String.valueOf(data.getValue().getUserEntity().getUserId())
+                        .equals(queriedUserId.getValue())) {
                     return data;
                 }
             }
@@ -61,6 +61,10 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     private void getUserData(AndroidArchRepository repository, String userId) {
+        if (data.getValue() != null &&
+                data.getValue().getUserEntity() != null &&
+                String.valueOf(data.getValue().getUserEntity().getUserId()).equals(queriedUserId.getValue()))
+            return;
         isDataBeingFetched.setValue(true);
         if (userDetailMutableLiveData != null)
             data.removeSource(userDetailMutableLiveData);
