@@ -8,7 +8,7 @@
 
         <import type="com.sagar.android_projects.androidarch.util.Response"/>
 
-        <import type="com.sagar.android_projects.androidarch.util.Messages"/>
+        <import type="com.sagar.android_projects.androidarch.core.Messages"/>
 
         <variable
             name="data"

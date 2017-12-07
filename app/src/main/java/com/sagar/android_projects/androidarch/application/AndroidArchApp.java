@@ -2,13 +2,13 @@ package com.sagar.android_projects.androidarch.application;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
-import android.util.Log;
+import android.support.annotation.NonNull;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.sagar.android_projects.androidarch.constants.Const;
 import com.sagar.android_projects.androidarch.repository.AndroidArchRepository;
 import com.sagar.android_projects.androidarch.repository.database.UserRoomDatabase;
 import com.sagar.android_projects.androidarch.repository.network.retrofit.AndroidArchApiInterface;
+import com.sagar.android_projects.androidarch.util.LogUtil;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,8 +28,8 @@ public class AndroidArchApp extends Application {
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
-            public void log(String message) {
-                Log.i(Const.LOG_TAG, message);
+            public void log(@NonNull String message) {
+                LogUtil.logI(message);
             }
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

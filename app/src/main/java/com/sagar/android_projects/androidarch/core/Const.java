@@ -1,4 +1,4 @@
-package com.sagar.android_projects.androidarch.constants;
+package com.sagar.android_projects.androidarch.core;
 
 
 public class Const {
