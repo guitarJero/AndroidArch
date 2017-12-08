@@ -72,7 +72,11 @@ public class AndroidArchRepository {
                 new Runnable() {
                     @Override
                     public void run() {
-                        userRoomDatabase.userDao().addUser(userEntity);
+                        long[] editedRows = userRoomDatabase.userDao().addUser(userEntity);
+                        for (long row :
+                                editedRows) {
+                            LogUtil.logI("inserted to row : " + row);
+                        }
                     }
                 }
         );

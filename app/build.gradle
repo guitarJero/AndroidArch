@@ -61,4 +61,10 @@ dependencies {
 
     //adapter for retrofit rx java
     compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
+    //dagger 2
+    compile 'com.google.dagger:dagger-android:2.11'
+    compile 'com.google.dagger:dagger-android-support:2.11'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
 }

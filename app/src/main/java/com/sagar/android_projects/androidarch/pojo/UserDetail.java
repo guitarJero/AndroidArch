@@ -20,6 +20,7 @@ public class UserDetail {
         return userEntity;
     }
 
+    @SuppressWarnings("unused")
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
@@ -28,6 +29,7 @@ public class UserDetail {
         return response;
     }
 
+    @SuppressWarnings("unused")
     public void setResponse(Response response) {
         this.response = response;
     }

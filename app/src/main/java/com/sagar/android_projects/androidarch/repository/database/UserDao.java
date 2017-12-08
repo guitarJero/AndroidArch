@@ -10,12 +10,13 @@ import io.reactivex.Flowable;
 
 @Dao
 public interface UserDao {
+    @SuppressWarnings("unused")
     @Query("SELECT * FROM UserDetail")
-    public Flowable<List<UserEntity>> getAllUser();
+    Flowable<List<UserEntity>> getAllUser();
 
     @Query("SELECT * FROM UserDetail WHERE userId = :userId")
-    public Flowable<UserEntity> getUserDetail(String userId);
+    Flowable<UserEntity> getUserDetail(String userId);
 
     @Insert
-    public long[] addUser(UserEntity... userEntity);
+    long[] addUser(UserEntity... userEntity);
 }

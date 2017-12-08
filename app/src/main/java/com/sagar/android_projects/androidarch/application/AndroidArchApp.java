@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.support.annotation.NonNull;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.sagar.android_projects.androidarch.core.Const;
 import com.sagar.android_projects.androidarch.repository.AndroidArchRepository;
 import com.sagar.android_projects.androidarch.repository.database.UserRoomDatabase;
 import com.sagar.android_projects.androidarch.repository.network.retrofit.AndroidArchApiInterface;
@@ -47,7 +48,7 @@ public class AndroidArchApp extends Application {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://reqres.in/")
+                .baseUrl(Const.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
@@ -56,9 +57,10 @@ public class AndroidArchApp extends Application {
         apiInterface = retrofit.create(AndroidArchApiInterface.class);
 
         userRoomDatabase = Room.databaseBuilder(this, UserRoomDatabase.class, UserRoomDatabase.DATABASE_NAME).build();
-        androidArchRepository = new AndroidArchRepository(apiInterface,userRoomDatabase);
+        androidArchRepository = new AndroidArchRepository(apiInterface, userRoomDatabase);
     }
 
+    @SuppressWarnings("unused")
     public UserRoomDatabase getUserRoomDatabase() {
         return userRoomDatabase;
     }
@@ -67,6 +69,7 @@ public class AndroidArchApp extends Application {
         return androidArchRepository;
     }
 
+    @SuppressWarnings("unused")
     public AndroidArchApiInterface getApiInterface() {
         return apiInterface;
     }

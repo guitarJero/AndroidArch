@@ -18,11 +18,12 @@ public class UserEntity {
     @SerializedName("avatar")
     private String avatar;
 
+    @SuppressWarnings("unused")
     @Ignore
     public UserEntity() {
     }
 
-    public UserEntity(int userId, String firstName, String lastName, String avatar) {
+    UserEntity(int userId, String firstName, String lastName, String avatar) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,6 +34,7 @@ public class UserEntity {
         return userId;
     }
 
+    @SuppressWarnings("unused")
     @Ignore
     public void setUserId(int userId) {
         this.userId = userId;
@@ -42,24 +44,27 @@ public class UserEntity {
         return firstName;
     }
 
+    @SuppressWarnings("unused")
     @Ignore
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    String getLastName() {
         return lastName;
     }
 
+    @SuppressWarnings("unused")
     @Ignore
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getAvatar() {
+    String getAvatar() {
         return avatar;
     }
 
+    @SuppressWarnings("unused")
     @Ignore
     public void setAvatar(String avatar) {
         this.avatar = avatar;
