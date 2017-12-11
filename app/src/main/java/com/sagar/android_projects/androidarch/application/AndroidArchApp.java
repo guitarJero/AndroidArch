@@ -1,76 +1,35 @@
 package com.sagar.android_projects.androidarch.application;
 
+import android.app.Activity;
 import android.app.Application;
-import android.arch.persistence.room.Room;
-import android.support.annotation.NonNull;
 
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.sagar.android_projects.androidarch.core.Const;
-import com.sagar.android_projects.androidarch.repository.AndroidArchRepository;
-import com.sagar.android_projects.androidarch.repository.database.UserRoomDatabase;
-import com.sagar.android_projects.androidarch.repository.network.retrofit.AndroidArchApiInterface;
-import com.sagar.android_projects.androidarch.repository.network.retrofit.interceptor.OfflineResponseCacheInterceptor;
-import com.sagar.android_projects.androidarch.repository.network.retrofit.interceptor.ResponseCacheInterceptor;
-import com.sagar.android_projects.androidarch.util.LogUtil;
+import com.sagar.android_projects.androidarch.di.component.DaggerAppComponent;
 
-import java.io.File;
+import javax.inject.Inject;
 
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 
 
-public class AndroidArchApp extends Application {
+public class AndroidArchApp extends Application implements HasActivityInjector {
 
-    private UserRoomDatabase userRoomDatabase;
-    private AndroidArchRepository androidArchRepository;
-    private AndroidArchApiInterface apiInterface;
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(@NonNull String message) {
-                LogUtil.logI(message);
-            }
-        });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
-                .addNetworkInterceptor(new ResponseCacheInterceptor())
-                .addInterceptor(new OfflineResponseCacheInterceptor(this))
-                .cache(new Cache(new File(getCacheDir(),
-                        "apiResponses"), 5 * 1024 * 1024))
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Const.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-
-        apiInterface = retrofit.create(AndroidArchApiInterface.class);
-
-        userRoomDatabase = Room.databaseBuilder(this, UserRoomDatabase.class, UserRoomDatabase.DATABASE_NAME).build();
-        androidArchRepository = new AndroidArchRepository(apiInterface, userRoomDatabase);
+        DaggerAppComponent
+                .builder()
+                .application(this)
+                .build()
+                .inject(this);
     }
 
-    @SuppressWarnings("unused")
-    public UserRoomDatabase getUserRoomDatabase() {
-        return userRoomDatabase;
-    }
-
-    public AndroidArchRepository getAndroidArchRepository() {
-        return androidArchRepository;
-    }
-
-    @SuppressWarnings("unused")
-    public AndroidArchApiInterface getApiInterface() {
-        return apiInterface;
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 }

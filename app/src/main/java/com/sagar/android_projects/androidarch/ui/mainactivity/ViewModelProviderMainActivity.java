@@ -10,7 +10,7 @@ public class ViewModelProviderMainActivity implements ViewModelProvider.Factory 
 
     private AndroidArchRepository androidArchRepository;
 
-    ViewModelProviderMainActivity(AndroidArchRepository androidArchRepository) {
+    public ViewModelProviderMainActivity(AndroidArchRepository androidArchRepository) {
         this.androidArchRepository = androidArchRepository;
     }
 

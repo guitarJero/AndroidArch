@@ -33,14 +33,17 @@ public class AppExecutors {
         return sInstance;
     }
 
+    @SuppressWarnings("unused")
     public Executor diskIO() {
         return diskIO;
     }
 
+    @SuppressWarnings("unused")
     public Executor mainThread() {
         return mainThread;
     }
 
+    @SuppressWarnings("unused")
     public Executor networkIO() {
         return networkIO;
     }

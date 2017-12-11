@@ -7,9 +7,11 @@ public class UserData {
     @SerializedName("data")
     private UserEntity userEntity;
 
+    @SuppressWarnings("unused")
     public UserData() {
     }
 
+    @SuppressWarnings("unused")
     public UserData(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
@@ -18,6 +20,7 @@ public class UserData {
         return userEntity;
     }
 
+    @SuppressWarnings("unused")
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }

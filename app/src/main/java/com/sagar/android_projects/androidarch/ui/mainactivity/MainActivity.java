@@ -12,39 +12,44 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.sagar.android_projects.androidarch.BR;
 import com.sagar.android_projects.androidarch.R;
-import com.sagar.android_projects.androidarch.application.AndroidArchApp;
 import com.sagar.android_projects.androidarch.databinding.ActivityMainBinding;
 import com.sagar.android_projects.androidarch.pojo.UserDetail;
+import com.sagar.android_projects.androidarch.repository.AndroidArchRepository;
 import com.sagar.android_projects.androidarch.util.UIUtil;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class MainActivity extends AppCompatActivity implements Observable {
+
+    @Inject
+    AndroidArchRepository androidArchRepository;
 
     @SuppressWarnings("FieldCanBeLocal")
     private ActivityMainBinding activityMainBinding;
 
     @SuppressWarnings("FieldCanBeLocal")
     private MainActivityViewModel mainActivityViewModel;
+    @Inject
     ViewModelProviderMainActivity viewModelProviderMainActivity;
 
-    private PropertyChangeRegistry registry;
+    @Inject
+    PropertyChangeRegistry registry;
 
     private String edittextText;
     public boolean isDataBeingFetched;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        registry = new PropertyChangeRegistry();
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         activityMainBinding.setContext(this);
 
         setSupportActionBar(activityMainBinding.toolbar);
-
-        viewModelProviderMainActivity = new ViewModelProviderMainActivity(
-                ((AndroidArchApp) getApplicationContext()).getAndroidArchRepository());
 
         mainActivityViewModel = ViewModelProviders.of(this, viewModelProviderMainActivity)
                 .get(MainActivityViewModel.class);
