@@ -10,7 +10,6 @@ import com.sagar.android_projects.androidarch.pojo.UserDetail;
 import com.sagar.android_projects.androidarch.repository.AndroidArchRepository;
 import com.sagar.android_projects.androidarch.util.Response;
 
-
 public class MainActivityViewModel extends ViewModel {
 
     private AndroidArchRepository repository;

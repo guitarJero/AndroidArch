@@ -25,17 +25,15 @@ public class MainActivity extends AppCompatActivity implements Observable {
 
     @Inject
     AndroidArchRepository androidArchRepository;
+    @Inject
+    ViewModelProviderMainActivity viewModelProviderMainActivity;
+    @Inject
+    PropertyChangeRegistry registry;
 
     @SuppressWarnings("FieldCanBeLocal")
     private ActivityMainBinding activityMainBinding;
-
     @SuppressWarnings("FieldCanBeLocal")
     private MainActivityViewModel mainActivityViewModel;
-    @Inject
-    ViewModelProviderMainActivity viewModelProviderMainActivity;
-
-    @Inject
-    PropertyChangeRegistry registry;
 
     private String edittextText;
     public boolean isDataBeingFetched;
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements Observable {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        edittextText = savedInstanceState.getString("queried_id");
-        mainActivityViewModel.getQueriedUserId().setValue(edittextText);
+        mainActivityViewModel.getQueriedUserId()
+                .setValue(savedInstanceState.getString("queried_id"));
     }
 }
