@@ -115,4 +115,17 @@ public class MainActivity extends AppCompatActivity implements Observable {
     public void removeOnPropertyChangedCallback(OnPropertyChangedCallback onPropertyChangedCallback) {
         registry.remove(onPropertyChangedCallback);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("queried_id", edittextText);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        edittextText = savedInstanceState.getString("queried_id");
+        mainActivityViewModel.getQueriedUserId().setValue(edittextText);
+    }
 }
