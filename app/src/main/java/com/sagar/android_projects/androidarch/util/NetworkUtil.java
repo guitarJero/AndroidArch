@@ -19,7 +19,7 @@ public class NetworkUtil {
      * @param context context
      * @return true if device connected to internet, false otherwise
      */
-    @SuppressWarnings({"unused", "SameParameterValue", "WeakerAccesssss"})
+    @SuppressWarnings({"unused", "SameParameterValue", "WeakerAccess"})
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
