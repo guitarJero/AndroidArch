@@ -21,7 +21,7 @@ public class UIUtil {
      *
      * @param context context
      */
-    @SuppressWarnings({"unused", "SameParameterValue", "WeakerAccess"})
+    @SuppressWarnings({"unused", "SameParameterValue", "WeakerAccessss"})
     public static void hideSoftKeyboard(Context context) {
         View view = ((Activity) context).getCurrentFocus();
         if (view != null) {

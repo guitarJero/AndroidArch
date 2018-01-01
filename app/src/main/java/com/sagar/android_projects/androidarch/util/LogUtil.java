@@ -37,7 +37,7 @@ public class LogUtil {
      * {@link #logV(String, String)}{@link #logD(String, String)}{@link #logI(String, String)}
      * {@link #logW(String, String)}{@link #logE(String, String)}
      */
-    private static final String LOG_TAG = "Android_Arch_Log";
+    private static final String LOG_TAG = "Android_Arch_App_Log";
 
     /**
      * by default the class will not print any logs in release apk. and if you want to print logs
