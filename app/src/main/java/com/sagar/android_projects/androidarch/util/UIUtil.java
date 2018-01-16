@@ -44,4 +44,15 @@ public class UIUtil {
         ((Activity) context).getWindow().setSoftInputMode(WindowManager.
                 LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+
+    /**
+     * method to set the activity to stay wake when running. this will not allow the android device
+     * to go to sleep when the activity is running.
+     * @param context activity context
+     */
+    @SuppressWarnings({"unused", "SameParameterValue", "WeakerAccess"})
+    public static void DoNotAllowForSleep(Context context){
+        ((Activity) context).getWindow()
+                .addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
 }
